@@ -1,8 +1,8 @@
-import { endAdventure } from '../..';
-import { wakeUp } from '../chapter_6/chapter_6_wake_up';
-import { askQuestion, clear, print } from '../ui/console';
+import { endAdventure } from "../..";
+import { wakeUp } from "../chapter_6/chapter_6_wake_up";
+import { askQuestion, clear, print } from "../ui/console";
 
-const VERDICTS = ['Guilty', 'Not Guilty'] as const;
+const VERDICTS = ["Guilty", "Not Guilty"] as const;
 type Verdict = typeof VERDICTS[number];
 
 interface Witness {
@@ -12,11 +12,11 @@ interface Witness {
 
 export function meetTheQueen(): void {
 	clear(true);
-	print('The Queen has put you on trial for stealing tarts.');
+	print("The Queen has put you on trial for stealing tarts.");
 
 	let guilty: boolean = false;
 
-	let witnesses: Witness[] = []; // 👉 FIXME ❌ - call getWitnesses here
+	let witnesses: Witness[] = getWitnesses(); // 👉 FIXME ❌ - call getWitnesses here
 
 	if (!witnesses || witnesses.length === 0) {
 		print(`No witnesses have come forward to defend you.`);
@@ -27,10 +27,8 @@ export function meetTheQueen(): void {
 
 	witnesses.forEach((witness) => {
 		witnessCount++;
-		print(
-			`${witness.name} gives their evidence: ${witness.giveEvidence()}`
-		);
-		if (witness.giveEvidence() === 'Guilty') {
+		print(`${witness.name} gives their evidence: ${witness.giveEvidence()}`);
+		if (witness.giveEvidence() === "Guilty") {
 			guilty = true;
 		}
 	});
@@ -40,12 +38,22 @@ export function meetTheQueen(): void {
 		return endAdventure();
 	} else {
 		print(`You have been found NOT GUILTY! Thank goodness. 🥳`);
-		print('Time to wake up...');
-		return askQuestion('Press ENTER to continue! ', wakeUp);
+		print("Time to wake up...");
+		return askQuestion("Press ENTER to continue! ", wakeUp);
 	}
 }
 
 // 👉 FIXME ❌ - this function needs writing to meet the above criteria
-function getWitnesses(): any {
-	return [];
+function getWitnesses() {
+	const WITNESSES: Witness[] = [];
+
+	for (let i: number = 0; i < 4; i++) {
+		let witness: Witness = {
+			name: `Witness ${i + 1}`,
+			giveEvidence: () => "Not Guilty",
+		};
+		WITNESSES.push(witness);
+	}
+
+	return WITNESSES;
 }

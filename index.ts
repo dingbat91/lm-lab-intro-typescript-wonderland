@@ -1,13 +1,13 @@
-import { enterTheRabbitHole } from './src/chapter_1/chapter_1_rabbit_hole';
-import { clear, print, askQuestion } from './src/ui/console';
+import { enterTheRabbitHole } from "./src/chapter_1/chapter_1_rabbit_hole";
+import { clear, print, askQuestion } from "./src/ui/console";
 
 export function haveAdventures(): void {
 	clear(false);
-	print('--------------------------');
-	print('| Welcome to Wonderland! |');
-	print('--------------------------');
+	print("--------------------------");
+	print("| Welcome to Wonderland! |");
+	print("--------------------------");
 
-	askQuestion(`What's your name? `, failImmediately); // 👉 FIXME ❌
+	askQuestion(`What's your name? `, startAdventure); // 👉 FIXME ❌
 }
 
 function startAdventure(name: string): void {
@@ -15,7 +15,7 @@ function startAdventure(name: string): void {
 		if (checkEntryCodeIsBiggerThanThree(numberBiggerThanThree)) {
 			return enterTheRabbitHole(name);
 		} else {
-			print('***************************************');
+			print("***************************************");
 			print(`Hi ${name}. Sadly, the entry code failed! ☹`);
 			return endAdventure();
 		}
@@ -30,17 +30,17 @@ function failImmediately() {
 	return endAdventure();
 }
 
-const numberBiggerThanThree: any = '11'; // 👉 FIXME ❌
+const numberBiggerThanThree: number = 5; // 👉 FIXME ❌
 
 // 👉 FIXME ❌
-function checkEntryCodeIsBiggerThanThree(code: any) {
-	return code > '3'; // 👉 FIXME ❌
+function checkEntryCodeIsBiggerThanThree(code: any): boolean {
+	return code > 3 ? true : false; // 👉 FIXME ❌
 }
 
 export function endAdventure(): void {
-	print('***************************************');
-	print('You did not make it through Wonderland. 😭');
-	askQuestion('Press ENTER to restart! ', haveAdventures);
+	print("***************************************");
+	print("You did not make it through Wonderland. 😭");
+	askQuestion("Press ENTER to restart! ", haveAdventures);
 }
 
 haveAdventures();

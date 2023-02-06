@@ -1,8 +1,8 @@
-import { endAdventure } from '../..';
-import { playCroquet } from '../chapter_4/chapter_4_croquet';
-import { askQuestion, clear, print } from '../ui/console';
+import { endAdventure } from "../..";
+import { playCroquet } from "../chapter_4/chapter_4_croquet";
+import { askQuestion, clear, print } from "../ui/console";
 
-const DRINKS = ['Coffee', 'Tea', 'Water', 'Lemonade'] as const;
+const DRINKS = ["Coffee", "Tea", "Water", "Lemonade"] as const;
 type DrinkType = typeof DRINKS[number];
 
 type Drink = {
@@ -20,12 +20,24 @@ type Table = {
 
 function setTheTable(): Table {
 	// 👉 FIXME ❌
-	return { seats: [] };
+	const seats: Seat[] = [];
+
+	for (let i: number = 0; i < 3; i++) {
+		let currentSeat: Seat = {
+			drink: {
+				poured: true,
+				type: "Tea",
+			},
+		};
+		seats.push(currentSeat);
+	}
+
+	return { seats };
 }
 
 export function attendATeaParty() {
 	clear(true);
-	print('The Mad Hatter 🎩 welcomes you to his tea party ☕ ');
+	print("The Mad Hatter 🎩 welcomes you to his tea party ☕ ");
 
 	print(`He and the March Hare set the table...`);
 
@@ -46,7 +58,7 @@ export function attendATeaParty() {
 	let properlySet = true;
 
 	drinks.seats.forEach((seat) => {
-		if (!seat.drink.poured || seat.drink.type !== 'Tea') {
+		if (!seat.drink.poured || seat.drink.type !== "Tea") {
 			properlySet = false;
 		}
 	});
@@ -62,5 +74,5 @@ export function attendATeaParty() {
 		`🥳 Every seat had a lovely cup of tea, and a great time was had by all. 🥳 `
 	);
 	print(`🏑 Time for a nice game of croquet! 🏑`);
-	return askQuestion('Press ENTER to continue! ', playCroquet);
+	return askQuestion("Press ENTER to continue! ", playCroquet);
 }
